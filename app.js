@@ -6,8 +6,8 @@ const io = require('socket.io')(http);
 app.use(express.static(__dirname + '/public'));
 
 
-http.listen(3000, function () {
-    console.log('listening port at 3000');
+http.listen(8081, function () {
+    console.log('listening port at 8081');
 })
 
 var count = 0;

@@ -18,11 +18,9 @@ $(function () {
     // $chatPage.show()
     var username;
     var connected = false;
-    var typing = false;
-    var lastTypingTime;
     var $currentInput = $usernameInput.focus();
 
-    var socket = io();
+    var socket = io.connect('http://localhost:8081');
 
     function setUsername() {
         username = $usernameInput.val().trim();
@@ -47,10 +45,8 @@ $(function () {
         var $messageBodyDiv = $('<span class="messageBody">')
             .text(data.message);
 
-        var typingClass = data.typing ? 'typing' : '';
         var $messageDiv = $('<li class="message"/>')
             .data('username', data.username)
-            .addClass(typingClass)
             .append($usernameDiv, $messageBodyDiv);
 
         addElement($messageDiv, options);
@@ -121,8 +117,6 @@ $(function () {
         if (event.which === 13) {
             if (username) {
                 sendMessage();
-                // socket.emit('stop typing');
-                typing = false;
             } else {
                 setUsername();
             }
